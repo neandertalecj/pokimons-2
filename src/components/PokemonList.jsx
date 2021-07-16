@@ -44,7 +44,7 @@ const PokemonList = () => {
     <div>
       <div className="container mx-auto flex relative">
         <div className="w-full lg:w-3/5">
-          <ul className="flex flex-wrap">
+          <ul className="flex flex-col sm:flex-row flex-wrap">
             {data && data.results.map(({ name, url }) => (
               <PokemonItem
                 key={url}
