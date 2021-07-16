@@ -63,7 +63,7 @@ const PokemonList = () => {
         </div>
 
         <div className="lg:w-2/5">
-          <div className="absolute lg:static left-0 bg-white">
+          <div className="fixed left-0 lg:left-2/3 right-0 top-0 lg:top-32 bg-white">{/*left-0 lg:static */}
             {infoPok.url && <InfoBlock info={infoPok} onClose={handleCloseInfo} />}
           </div>
         </div>

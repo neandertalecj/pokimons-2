@@ -11,7 +11,6 @@ const tabNames = {
 
 const InfoBlock = ({info, onClose}) => {
   const { url, name, id, type, tab } = info
-  // console.log('REST',rest)
   
   // Adds zeros before the digit - in our case it an id of pokemon. There should be a total of three digits
   const pad = (str, max) => {
@@ -27,36 +26,40 @@ const InfoBlock = ({info, onClose}) => {
   }
 
   return (
-    <div className="text-center border border-black p-5 relative">
-      <div
-        className="visible lg:invisible absolute right-5 bg-gray-300 py-1 px-3 rounded-full hover:bg-gray-400"
-        onClick={onClose}
-      >x</div>
+    <div className="h-screen bg-gray-400 lg:bg-transparent">
+      <div className="text-center border border-black p-5 lg:max-w-xs relative bg-white">
+        <div
+          className="visible lg:invisible absolute right-5 bg-gray-300 py-1 px-3 rounded-full hover:bg-gray-400"
+          onClick={onClose}
+        >x</div>
+        <div className="max-w-xs mx-auto">
+          <img className="inline-block " src={url} alt={name} />
+        </div>
+        
 
-      <img className="inline-block" src={url} alt={name} />
+        <div className="text-center font-medium text-1xl capitalize py-2">
+          {name} #{pad(id, 3)}
+        </div>
 
-      <div className="text-center font-medium text-2xl capitalize py-8">
-        {name} #{pad(id, 3)}
-      </div>
-
-      <div className="">
-      <table className="table-fixed border-collapse border border-black w-full">
-        <tbody>
-          <tr>
-            <td className="w-3/4 border border-black py-2">Type</td>
-            <td className="w-1/4 border border-black py-2">
-              {type && strTypes(type)}
-            </td>
-          </tr>
-          {tab && Object.entries(tab).map(el => (
-            <tr key={el[0]}>
-              <td className="border border-black py-2">{tabNames[el[0]]}</td>
-              <td className="border border-black py-2">{el[1]}</td>
+        <div className="max-w-xs m-auto">
+        <table className="table-fixed border-collapse border border-black w-full">
+          <tbody>
+            <tr>
+              <td className="w-3/4 border border-black">Type</td>
+              <td className="w-1/4 border border-black">
+                {type && strTypes(type)}
+              </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+            {tab && Object.entries(tab).map(el => (
+              <tr key={el[0]}>
+                <td className="border border-black">{tabNames[el[0]]}</td>
+                <td className="border border-black">{el[1]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
+        </div>
       </div>
     </div>
   )
