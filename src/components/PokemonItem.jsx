@@ -8,7 +8,7 @@ const PokemonItem = ({ name, id, onImageClick }) => {
   const [imgStatus, setImgStaus] = useState('loading')
   const { data } = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
   const [info, setInfo] = useState({})
-  const { colletctTypes } = useContext(TypeContext)
+  // const { colletctTypes } = useContext(TypeContext)
 
   useEffect(() => {
     data && setInfo({
@@ -28,7 +28,7 @@ const PokemonItem = ({ name, id, onImageClick }) => {
       }
     })
 
-    data && colletctTypes(data.types)
+    // data && colletctTypes(data.types)
   }, [data])
 
   const handleImageLoaded = () => {
