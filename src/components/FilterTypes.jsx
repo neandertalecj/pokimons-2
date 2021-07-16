@@ -6,7 +6,7 @@ const FilterTypes = (props) => {
   const { pageTypes } = useContext(TypeContext)
 
   return (
-    <div>
+    <div className="pb-52">
       <h2 className="font-medium text-2xl">Avaible types on this page</h2>
       <div className="flex flex-wrap space-x-2">
         {pageTypes && pageTypes.map(name => (   
