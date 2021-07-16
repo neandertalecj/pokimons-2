@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { TypeContext } from '../App'
 import useFetch from '../Hooks/useFetch'
 import Preloader from './Preloader'
 import Badge from './Badge'
@@ -7,6 +8,7 @@ const PokemonItem = ({ name, id, onImageClick }) => {
   const [imgStatus, setImgStaus] = useState('loading')
   const { data } = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
   const [info, setInfo] = useState({})
+  const { colletctTypes } = useContext(TypeContext)
 
   useEffect(() => {
     data && setInfo({
@@ -25,6 +27,8 @@ const PokemonItem = ({ name, id, onImageClick }) => {
         totalMoves: data.moves.length
       }
     })
+
+    data && colletctTypes(data.types)
   }, [data])
 
   const handleImageLoaded = () => {
@@ -34,14 +38,9 @@ const PokemonItem = ({ name, id, onImageClick }) => {
   const handleImageErrored = () => {
     setImgStaus('failed to load')
   }
-
-  data && console.log('Abilitis', data.moves.length)//data.types[0].type.name
-                                             // data.stats
-
-  // data.weight     Weight
-  
+ 
   return (
-    <li className="w-1/3 mb-8">
+    <li className="sm:w-1/2 md:w-1/3 mb-8">
       <div className="border border-black px-5 pb-16 mx-4">
         <img
           className="my-4 cursor-pointer"
@@ -60,7 +59,7 @@ const PokemonItem = ({ name, id, onImageClick }) => {
         </div>
         <div className="flex space-x-2">
           {data && data.types.map(({ type: { name } }) => (   
-            <Badge key={name} name={name} />
+            <Badge key={name} name={name} className="w-1/2" />
           ))}
         </div>
       </div>
