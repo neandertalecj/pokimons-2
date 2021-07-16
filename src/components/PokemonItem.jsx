@@ -4,32 +4,11 @@ import useFetch from '../Hooks/useFetch'
 import Preloader from './Preloader'
 import Badge from './Badge'
 
-const PokemonItem = ({ name, id, onImageClick }) => {
+const PokemonItem = ({ pokData, onImageClick }) => {
   const [imgStatus, setImgStaus] = useState('loading')
-  const { data } = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-  const [info, setInfo] = useState({})
-  // const { colletctTypes } = useContext(TypeContext)
 
-  useEffect(() => {
-    data && setInfo({
-      url: `https://pokeres.bastionbot.org/images/pokemon/${id}.png`,
-      name: name,
-      id: id,
-      type: data.types,
-      tab: {
-        attack: data.stats[1].base_stat,
-        defense: data.stats[2].base_stat,
-        hp: data.stats[0].base_stat,
-        spAttack: data.stats[3].base_stat,
-        spDefense: data.stats[4].base_stat,
-        speed: data.stats[5].base_stat,
-        weight: data.weight,
-        totalMoves: data.moves.length
-      }
-    })
-
-    // data && colletctTypes(data.types)
-  }, [data])
+  const { url, name, id, type, tab } = pokData
+  // const { attack, defense, hp, spAttack, spDefense, speed, weight, totalMoves } = tab
 
   const handleImageLoaded = () => {
     setImgStaus('loaded')
@@ -45,10 +24,10 @@ const PokemonItem = ({ name, id, onImageClick }) => {
         <img
           className="my-4 cursor-pointer"
           src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
-          alt={id}
+          alt={name}
           onLoad={handleImageLoaded}
           onError={handleImageErrored}
-          onClick={() => onImageClick(info)}
+          onClick={() => onImageClick(id)}
         />
 
         {imgStatus === 'failed to load' && imgStatus}
@@ -58,7 +37,7 @@ const PokemonItem = ({ name, id, onImageClick }) => {
           {name}
         </div>
         <div className="flex space-x-2">
-          {data && data.types.map(({ type: { name } }) => (   
+          {pokData && type.map(({ type: { name } }) => (   
             <Badge key={name} name={name} className="w-1/2" />
           ))}
         </div>

@@ -22,9 +22,8 @@ function App() {
           <div className="capitalize text-center border border-black inline-block py-2 px-36 text-3xl font-medium">
             pokedex
           </div>
-          <Container />
         </div>
-        <PokemonList />
+        <Container />
       </div>
     </TypeContext.Provider>
   )

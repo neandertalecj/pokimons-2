@@ -5,33 +5,16 @@ import PokemonItem from './PokemonItem'
 import InfoBlock from './InfoBlock'
 import FilterTypes from './FilterTypes'
 
-const initialInfo = {
-  url: '',
-  name: '',
-  id: '',
-  type: [],
-  tab: {
-    attack: '',
-    defense: '',
-    hp: '',
-    spAttack: '',
-    spDefense: '',
-    speed: '',
-    weight: '',
-    totalMoves: ''
+const PokemonList = ({ data, loading, error, handleLoadMore }) => {
+  const [infoPok, setInfoPok] = useState(null)
+
+  const handleImageClick = id => setInfoPok(id)
+
+  const handleCloseInfo = () => setInfoPok(null)
+
+  const getPokimonInfo = id => {
+    return data.filter(pok => pok.id === id)
   }
-}
-
-
-const PokemonList = () => {
-  const { data, loading, error, fetchNow } = useFetch(`https://pokeapi.co/api/v2/pokemon?limit=12`)
-  const [infoPok, setInfoPok] = useState(initialInfo)
-
-  const handleLoadMore = () => fetchNow(data.next)
-
-  const handleImageClick = info => setInfoPok(info)
-
-  const handleCloseInfo = () => setInfoPok(initialInfo)
 
   if(loading) return <Preloader color="#1d4ed8" className="h-20" screenHeight={"h-screen"} />
 
@@ -45,11 +28,10 @@ const PokemonList = () => {
       <div className="container mx-auto flex relative">
         <div className="w-full lg:w-3/5">
           <ul className="flex flex-col sm:flex-row flex-wrap">
-            {data && data.results.map(({ name, url }) => (
+            {data && data.map((pokData) => (
               <PokemonItem
-                key={url}
-                name={name}
-                id={url.match(/\d+/g).slice(-1)}
+                key={pokData.id}
+                pokData={pokData}
                 onImageClick={handleImageClick}
               />
             ))}
@@ -63,8 +45,8 @@ const PokemonList = () => {
         </div>
 
         <div className="lg:w-2/5">
-          <div className="fixed left-0 lg:left-2/3 right-0 top-0 lg:top-32 bg-white">{/*left-0 lg:static */}
-            {infoPok.url && <InfoBlock info={infoPok} onClose={handleCloseInfo} />}
+          <div className="fixed left-0 lg:left-2/3 right-0 top-0 lg:top-32 bg-white">
+            {infoPok && <InfoBlock info={getPokimonInfo(infoPok)} onClose={handleCloseInfo} />}
           </div>
         </div>
       </div>

@@ -10,10 +10,11 @@ const tabNames = {
 }
 
 const InfoBlock = ({info, onClose}) => {
-  const { url, name, id, type, tab } = info
-  
+  const { url, name, id, type, tab } = info[0]
+  console.log('POKEMON_INFO', info )
   // Adds zeros before the digit - in our case it an id of pokemon. There should be a total of three digits
   const pad = (str, max) => {
+    console.log('STR', str, max)
     str = str.toString()
     return str.length < max ? pad("0" + str, max) : str
   }
@@ -33,7 +34,11 @@ const InfoBlock = ({info, onClose}) => {
           onClick={onClose}
         >x</div>
         <div className="max-w-xs mx-auto">
-          <img className="inline-block " src={url} alt={name} />
+          <img
+            className="inline-block"
+            src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
+            alt={name}
+          />
         </div>
         
 

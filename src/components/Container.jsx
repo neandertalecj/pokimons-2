@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
 import useFetch from '../Hooks/useFetch'
-
+import PokemonList from './PokemonList'
 
 const Container = () => {
-  const [urls, setUrls] = useState([])
   const { data, loading, error, fetchNow } = useFetch(`https://pokeapi.co/api/v2/pokemon?limit=12`)
   const [appData, setAppData] = useState([])
-
-  // data && console.log(data.results)
 
   useEffect(() => {
     data && Promise.all(data.results.map(({url}) =>
@@ -67,11 +64,16 @@ const Container = () => {
     return pokCombined
   }
 
-  console.log('DATA',appData)
+  const handleLoadMore = () => fetchNow(data.next)
   
   return (
     <div>
-      Container
+      <PokemonList
+        data={appData}
+        loading={loading}
+        error={error}
+        handleLoadMore={handleLoadMore}
+      />
     </div>
   )
 }
