@@ -61,7 +61,7 @@ const PokemonList = ({ data, loading, error, onLoadMore, onFilter }) => {
         </div>
       </div>
       <div className="container mx-auto pt-20">
-        <div>
+        <div className="w-full lg:w-3/5">
           <FilterTypes
             typesOnPage={getTypesOnPage()}
             onFilter={onFilter}
