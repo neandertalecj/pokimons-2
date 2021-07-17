@@ -4,12 +4,12 @@ import PokemonItem from './PokemonItem'
 import InfoBlock from './InfoBlock'
 import FilterTypes from './FilterTypes'
 
-const PokemonList = ({ data, loading, error, onLoadMore, onFilter }) => {
-  const [infoPok, setInfoPok] = useState(null)
+const PokemonList = ({ data, loading, error, onLoadMore, onFilter, onSort, infoPok, setInfoPok, handleCloseInfo }) => {
+  // const [infoPok, setInfoPok] = useState(null)
 
   const handleImageClick = id => setInfoPok(id)
 
-  const handleCloseInfo = () => setInfoPok(null)
+  // const handleCloseInfo = () => setInfoPok(null)
 
   const getPokimonInfo = id =>  data.filter(pok => pok.id === id)
 
@@ -64,6 +64,7 @@ const PokemonList = ({ data, loading, error, onLoadMore, onFilter }) => {
         <div className="w-full lg:w-3/5">
           <FilterTypes
             typesOnPage={getTypesOnPage()}
+            onSort={onSort}
             onFilter={onFilter}
           />
         </div>

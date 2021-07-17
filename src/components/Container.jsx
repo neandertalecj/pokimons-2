@@ -5,6 +5,8 @@ import PokemonList from './PokemonList'
 const Container = () => {
   const { data, loading, error, fetchNow } = useFetch(`https://pokeapi.co/api/v2/pokemon?limit=12`)
   const [appData, setAppData] = useState([])
+  const [appDataM, setAppDataM] = useState([])
+  const [infoPok, setInfoPok] = useState(null)
 
   useEffect(() => {
     data && Promise.all(data.results.map(({url}) =>
@@ -17,6 +19,10 @@ const Container = () => {
           data && setAppData(combineData(data, pokData))
         })
   }, [data])
+
+  useEffect(() => {
+    appData && setAppDataM(appData)
+  }, [appData])
 
   const checkStatus = response => {
     if (response.ok) {
@@ -71,25 +77,46 @@ const Container = () => {
 
   const handleLoadMore = () => fetchNow(data.next)
 
+  const handleCloseInfo = () => setInfoPok(null)
+
   // Sorting appData (page data) by type
-  const handleFilter = targetType => {
-    const sorted = appData.sort((a, b) => {
+  const handleSort = targetType => {
+    const sorted = appDataM.sort((a, b) => {
       let mark = -1
       a.type.includes(targetType) ? mark = -1 : mark = 1
       return mark
     })
 
-    setAppData([...sorted])
+    setAppDataM([...sorted])
   }
+
+  // Filtering appData (page data) by type
+  const handleFilter = targetType => {
+    handleCloseInfo()
+    if (targetType === 'all') {
+      setAppDataM(appData)
+    } else {
+      const filtered = appDataM.filter(el => el.type.includes(targetType))
+
+      setAppDataM([...filtered])
+    }
+  }
+
+            console.log("DATA-M", appDataM)
+          console.log("DATA", appData)
   
   return (
     <div>
       <PokemonList
-        data={appData}
+        data={appDataM}
         loading={loading}
         error={error}
         onLoadMore={handleLoadMore}
+        onSort={handleSort}
         onFilter={handleFilter}
+        infoPok={infoPok}
+        setInfoPok={setInfoPok}
+        handleCloseInfo={handleCloseInfo}
       />
     </div>
   )
