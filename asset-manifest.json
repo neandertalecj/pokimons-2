@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/pokimons-2/static/css/main.4f816786.chunk.css",
-    "main.js": "/pokimons-2/static/js/main.1064049a.chunk.js",
-    "main.js.map": "/pokimons-2/static/js/main.1064049a.chunk.js.map",
+    "main.js": "/pokimons-2/static/js/main.6d142032.chunk.js",
+    "main.js.map": "/pokimons-2/static/js/main.6d142032.chunk.js.map",
     "runtime-main.js": "/pokimons-2/static/js/runtime-main.cf074b37.js",
     "runtime-main.js.map": "/pokimons-2/static/js/runtime-main.cf074b37.js.map",
     "static/js/2.79b18133.chunk.js": "/pokimons-2/static/js/2.79b18133.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.cf074b37.js",
     "static/js/2.79b18133.chunk.js",
     "static/css/main.4f816786.chunk.css",
-    "static/js/main.1064049a.chunk.js"
+    "static/js/main.6d142032.chunk.js"
   ]
 }
