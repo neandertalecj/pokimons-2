@@ -101,9 +101,6 @@ const Container = () => {
       setAppDataM([...filtered])
     }
   }
-
-            console.log("DATA-M", appDataM)
-          console.log("DATA", appData)
   
   return (
     <div>
