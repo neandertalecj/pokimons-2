@@ -14,13 +14,11 @@ const Container = () => {
         .catch(error => console.log('There was a problem!', error))
         ))
         .then(pokData => {
-          // data && console.log('COMBINE',combineData(data, pokData))
           data && setAppData(combineData(data, pokData))
-
         })
   }, [data])
 
-  function checkStatus(response) {
+  const checkStatus = response => {
     if (response.ok) {
       return Promise.resolve(response);
     } else {
@@ -28,9 +26,16 @@ const Container = () => {
     }
   }
 
-  function parseJSON(response) {
-    return response.json();
+  const parseJSON = response => response.json()
+
+  //Extraction of types from a complex structure
+  const getTypes = objectPokemon => {
+    const typesArrey = objectPokemon.types.map(({ type: { name }})=> {
+      return name
+    })
+    return typesArrey
   }
+  
 
 // Preparing data for the app by combining results from multiple requests
   const combineData = (data, pokData) => {
@@ -47,7 +52,7 @@ const Container = () => {
         url: pokN.url,
         name: pokN.name,
         id: idD,
-        type: matched[0]['types'],
+        type: getTypes(matched[0]), 
         tab: {
           attack: matched[0].stats[1].base_stat,
           defense: matched[0].stats[2].base_stat,
@@ -65,6 +70,17 @@ const Container = () => {
   }
 
   const handleLoadMore = () => fetchNow(data.next)
+
+  // Sorting appData (page data) by type
+  const handleFilter = targetType => {
+    const sorted = appData.sort((a, b) => {
+      let mark = -1
+      a.type.includes(targetType) ? mark = -1 : mark = 1
+      return mark
+    })
+
+    setAppData([...sorted])
+  }
   
   return (
     <div>
@@ -72,7 +88,8 @@ const Container = () => {
         data={appData}
         loading={loading}
         error={error}
-        handleLoadMore={handleLoadMore}
+        onLoadMore={handleLoadMore}
+        onFilter={handleFilter}
       />
     </div>
   )

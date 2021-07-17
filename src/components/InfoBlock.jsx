@@ -10,7 +10,7 @@ const tabNames = {
 }
 
 const InfoBlock = ({info, onClose}) => {
-  const { url, name, id, type, tab } = info[0]
+  const { name, id, type, tab } = info[0]
   console.log('POKEMON_INFO', info )
   // Adds zeros before the digit - in our case it an id of pokemon. There should be a total of three digits
   const pad = (str, max) => {
@@ -22,7 +22,7 @@ const InfoBlock = ({info, onClose}) => {
   // Forms a types string from an array of objects
   const strTypes = arrTypes => {
     return arrTypes.reduce((acc, el) => {
-      return `${acc}, ${el.type.name}`.replace(/^, /, '')
+      return `${acc}, ${el}`.replace(/^, /, '')
     }, '')
   }
 
@@ -30,7 +30,7 @@ const InfoBlock = ({info, onClose}) => {
     <div className="h-screen bg-gray-400 lg:bg-transparent">
       <div className="text-center border border-black p-5 lg:max-w-xs relative bg-white">
         <div
-          className="visible lg:invisible absolute right-5 bg-gray-300 py-1 px-3 rounded-full hover:bg-gray-400"
+          className="cursor-pointer visible lg:invisible absolute right-5 bg-gray-300 py-1 px-3 rounded-full hover:bg-gray-400"
           onClick={onClose}
         >x</div>
         <div className="max-w-xs mx-auto">

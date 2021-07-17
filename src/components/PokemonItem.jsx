@@ -1,14 +1,11 @@
-import { useContext, useEffect, useState } from "react"
-import { TypeContext } from '../App'
-import useFetch from '../Hooks/useFetch'
+import { useState } from "react"
 import Preloader from './Preloader'
 import Badge from './Badge'
 
 const PokemonItem = ({ pokData, onImageClick }) => {
   const [imgStatus, setImgStaus] = useState('loading')
 
-  const { url, name, id, type, tab } = pokData
-  // const { attack, defense, hp, spAttack, spDefense, speed, weight, totalMoves } = tab
+  const { name, id, type } = pokData
 
   const handleImageLoaded = () => {
     setImgStaus('loaded')
@@ -37,7 +34,7 @@ const PokemonItem = ({ pokData, onImageClick }) => {
           {name}
         </div>
         <div className="flex space-x-2">
-          {pokData && type.map(({ type: { name } }) => (   
+          {pokData && type.map(name => (   
             <Badge key={name} name={name} className="w-1/2" />
           ))}
         </div>

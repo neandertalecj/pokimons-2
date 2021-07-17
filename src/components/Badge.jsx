@@ -1,4 +1,4 @@
-const Badge = ({ name, className }) => {
+const Badge = ({ name, className, onFilter }) => {
   const bgCollor = {
     grass: 'from-green-300 to-green-100 border-green-500',
     poison: 'from-purple-400 to-purple-100 border-purple-500',
@@ -11,7 +11,10 @@ const Badge = ({ name, className }) => {
     fairy: 'from-red-200 to-red-50 border-red-400',
   }
   return (
-    <div className={`border-2 bg-gradient-to-t ${bgCollor[name]} rounded ${className} text-center`}>
+    <div
+      className={`border-2 bg-gradient-to-t ${bgCollor[name]} rounded ${className} text-center`}
+      onClick={onFilter}
+    >
       {name}
     </div>
   )

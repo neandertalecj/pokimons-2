@@ -1,19 +1,24 @@
-import { memo, useState } from 'react'
-import useFetch from '../Hooks/useFetch'
+import { useState } from 'react'
 import Preloader from '../components/Preloader'
 import PokemonItem from './PokemonItem'
 import InfoBlock from './InfoBlock'
 import FilterTypes from './FilterTypes'
 
-const PokemonList = ({ data, loading, error, handleLoadMore }) => {
+const PokemonList = ({ data, loading, error, onLoadMore, onFilter }) => {
   const [infoPok, setInfoPok] = useState(null)
 
   const handleImageClick = id => setInfoPok(id)
 
   const handleCloseInfo = () => setInfoPok(null)
 
-  const getPokimonInfo = id => {
-    return data.filter(pok => pok.id === id)
+  const getPokimonInfo = id =>  data.filter(pok => pok.id === id)
+  
+// Getting unic Types on page
+  const getTypesOnPage = () => {
+    const arrTypes = data.reduce((acc, el) =>  [...acc, ...el.type], [])
+    const unic = arrTypes.filter((item, i, ar) => ar.indexOf(item) === i)
+
+    return unic
   }
 
   if(loading) return <Preloader color="#1d4ed8" className="h-20" screenHeight={"h-screen"} />
@@ -38,7 +43,7 @@ const PokemonList = ({ data, loading, error, handleLoadMore }) => {
           </ul>
           <button
             className="w-full py-2 rounded bg-blue-400 text-white font-medium"
-            onClick={handleLoadMore}
+            onClick={onLoadMore}
           >
             Load More
           </button>
@@ -52,11 +57,14 @@ const PokemonList = ({ data, loading, error, handleLoadMore }) => {
       </div>
       <div className="container mx-auto pt-20">
         <div>
-          <FilterTypes />
+          <FilterTypes
+            typesOnPage={getTypesOnPage()}
+            onFilter={onFilter}
+          />
         </div>
       </div>
     </div>
   )
 }
 
-export default memo(PokemonList)
+export default PokemonList
