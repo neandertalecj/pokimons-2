@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pokimons-2/static/css/main.4f816786.chunk.css",
+    "main.js": "/pokimons-2/static/js/main.3562fc99.chunk.js",
+    "main.js.map": "/pokimons-2/static/js/main.3562fc99.chunk.js.map",
+    "runtime-main.js": "/pokimons-2/static/js/runtime-main.cf074b37.js",
+    "runtime-main.js.map": "/pokimons-2/static/js/runtime-main.cf074b37.js.map",
+    "static/js/2.3f5bc77f.chunk.js": "/pokimons-2/static/js/2.3f5bc77f.chunk.js",
+    "static/js/2.3f5bc77f.chunk.js.map": "/pokimons-2/static/js/2.3f5bc77f.chunk.js.map",
+    "static/js/3.d1c72d16.chunk.js": "/pokimons-2/static/js/3.d1c72d16.chunk.js",
+    "static/js/3.d1c72d16.chunk.js.map": "/pokimons-2/static/js/3.d1c72d16.chunk.js.map",
+    "index.html": "/pokimons-2/index.html",
+    "static/css/main.4f816786.chunk.css.map": "/pokimons-2/static/css/main.4f816786.chunk.css.map",
+    "static/js/2.3f5bc77f.chunk.js.LICENSE.txt": "/pokimons-2/static/js/2.3f5bc77f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cf074b37.js",
+    "static/js/2.3f5bc77f.chunk.js",
+    "static/css/main.4f816786.chunk.css",
+    "static/js/main.3562fc99.chunk.js"
+  ]
+}
