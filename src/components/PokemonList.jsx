@@ -12,6 +12,11 @@ const PokemonList = ({ data, loading, error, onLoadMore, onFilter }) => {
   const handleCloseInfo = () => setInfoPok(null)
 
   const getPokimonInfo = id =>  data.filter(pok => pok.id === id)
+
+  const handleClicLoadMore = () => {
+    handleCloseInfo()
+    onLoadMore()
+  }
   
 // Getting unic Types on page
   const getTypesOnPage = () => {
@@ -43,7 +48,7 @@ const PokemonList = ({ data, loading, error, onLoadMore, onFilter }) => {
           </ul>
           <button
             className="w-full py-2 rounded bg-blue-400 text-white font-medium"
-            onClick={onLoadMore}
+            onClick={handleClicLoadMore}
           >
             Load More
           </button>

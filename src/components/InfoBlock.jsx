@@ -9,12 +9,10 @@ const tabNames = {
   totalMoves: 'Tottal moves',
 }
 
-const InfoBlock = ({info, onClose}) => {
+const InfoBlock = ({ info, onClose }) => {
   const { name, id, type, tab } = info[0]
-  console.log('POKEMON_INFO', info )
   // Adds zeros before the digit - in our case it an id of pokemon. There should be a total of three digits
   const pad = (str, max) => {
-    console.log('STR', str, max)
     str = str.toString()
     return str.length < max ? pad("0" + str, max) : str
   }
